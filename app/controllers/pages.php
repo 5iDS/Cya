@@ -29,17 +29,17 @@ class Pages extends CI_Controller {
 	
 	public function index()
 	{
-		//$this->load->model('Location');
 		$GetProvinces = $this->Location->listProvinces('ZA');
+		$GetCountries = $this->Location->listCountries('ZA');
 		/**
 		if(class_exists('iDBug')){
 			$debug = new iDBug();
 			$debug->debug('GetProvinces',$GetProvinces);
 		}
 		/**/
-
 		$data = array(
-               'ProvincesArray' => $GetProvinces
+				'countriesArray' => $GetCountries,
+				'ProvincesArray' => $GetProvinces
 		);
 		
 		$this->load->view('templates/_header');

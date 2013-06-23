@@ -2,10 +2,21 @@
 	</section>
 
 	<footer id="colophon" data-role="footer">
-		<div id="site-generator">
+		<?php 
+		/**
+		$this->load->library('user_agent');
+		
+		if ($this->agent->mobile()) {
+			?>
 			<h4><?php echo date('Y'). ' &copy; &hellip;a.work.of.HipHop&hellip;';?></h4>
 			<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-		</div>
+			<?php
+		} else {/**/ ?>
+			<div id="site-generator">
+				<h4><?php echo date('Y'). ' &copy; &hellip;a.work.of.HipHop&hellip;';?></h4>
+				<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+			</div>
+		<?php /**};/**/ ?>
 	</footer>
 	
 </div>
@@ -30,12 +41,17 @@
 	head.js(
 		{ jquery: "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" },
 		<?php /** ?>
-		{ jqueryMobile: "//code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js" },
+		if ($this->agent->mobile()) {
+			{ jqueryMobile: "//code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js" },
+		};
 		<?php /**/?>
 		{ jqueryPlugins: "assets/js/plugins/jquery/jquery.plugins.js" },
-		//{ ajaxification: "/assets/js/myFunck/ajaxification.js" },
+		{ app: "/assets/js/app.js" },
 		{ history: "//cdnjs.cloudflare.com/ajax/libs/history.js/1.8/native.history.min.js" }
 	);
+	head.ready("app", function(){
+		var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+	});
 </script>
 </body>
 </html>

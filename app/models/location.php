@@ -13,41 +13,94 @@
 #
 #-----------------------------------------------------------------
 class Location extends CI_Model {
-	
-	//FIELDS
-	public $country_table = 'countries';
-	public $provinces_table = 'provinces';
-	
+
 	/**/
 	public function __construct() {
 		// Call the Model constructor
-        parent::__construct();	
+        parent::__construct();
+        
+       
 	}
+	 //FIELDS
+	const country_table = 'countries';
+	const provinces_table = 'provinces';
 	/**/
-
-	//COUNTRY
+	#-----------------------------------------------------------------
+	# COUNTRY FUNCKTION
+	#
+	# @param  string $countryCode
+	# @return  null
+	#
+	#-----------------------------------------------------------------
 	public function setCountry($countryCode) {
 		$this->country = $countryCode;
 	}
-	
-	//PROVINCE
+	#-----------------------------------------------------------------
+	# LIST COUNTRYs FUNCKTION
+	# List available countries
+	#
+	# @param  null
+	# @return array(object) $countryResults->result();
+	#
+	#-----------------------------------------------------------------
+	public function listCountries($default="ZA"){
+		//FIRST FIND DEFAULT COUNTRY ID
+		
+		$sql = "SELECT ID FROM countries WHERE Code= ? ORDER BY ID";
+		$results = $this->db->query( $sql, array($default) );
+		//OUTPUT [ROW]
+		foreach ($results->result() as $result) {
+			$selectedCountry = $result->ID;
+		}
+		/**/
+		//RUN PROVINCES QUERY
+		if(empty($default) or empty($selectedCountry) ){
+			throw new Exception("Unsupported country!");
+			return;
+		} else {
+			$country_query = "SELECT * FROM countries ORDER BY ID";
+			$countryResults = $this->db->query($country_query);
+			/**
+			if(class_exists('iDBug')){
+				$debug = new iDBug();
+				$debug->debug('countryResults',$countryResults->result());
+			}
+			/**/
+			return $countryResults->result();
+		}
+		/**/
+	}
+	#-----------------------------------------------------------------
+	# PROVINCE FUNCKTION
+	# set Province scope
+	#
+	# @param  string $province
+	# @return  null
+	#
+	#-----------------------------------------------------------------
 	public function setProvince($province) {
 		$this->province = $province;
 	}
-	
+	#-----------------------------------------------------------------
+	# LIST PROVINCEs FUNCKTION
+	# List available provinces
+	#
+	# @param  string $countryCode
+	# @return array(object) $provinceResults->result();
+	#
+	#-----------------------------------------------------------------
 	public function listProvinces($countryCode){
 
-		//$this->load->database();
 		//FIRST FIND COUNTRY ID
 		$sql = "SELECT ID FROM countries WHERE Code= ? ORDER BY ID";
 		$results = $this->db->query( $sql, array($countryCode) );
-		/**
+		/**/
 		if(class_exists('iDBug')){
 			$debug = new iDBug();
 			$debug->debug('results',$results->result());
 		}
 		/**/
-		// Output the rows
+		//OUTPUT [ROW]
 		foreach ($results->result() as $result) {
 			$selectedCountry = $result->ID;
 		}
@@ -58,8 +111,9 @@ class Location extends CI_Model {
 		}
 		/**/
 		/**/
-		if(empty($countryCode)){
-			//throw new Exception("Unsupported country!");
+		//RUN PROVINCES QUERY
+		if(empty($countryCode) or empty($selectedCountry) ){
+			throw new Exception("Unsupported country!");
 			return;
 		} else {
 			$province_query = "SELECT * FROM provinces WHERE Country=? ORDER BY ID";

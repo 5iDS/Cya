@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','email','form_validation');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('ibebuggin','security');
+$autoload['helper'] = array('ibebuggin','array','cookie','form');
 
 
 /*

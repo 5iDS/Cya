@@ -1,34 +1,35 @@
 <?php
+
 /**
  * Cjax Framework, compatibility with mod_rewrite
  * Prevents CI from throwing a 404 if  a friendly  url is used.
  * AJAXFW4CI 1.8 - CJAX Framework 5.4
  */
-if( isset( $_SERVER['SCRIPT_NAME'] ) ) 
+	if( isset( $_SERVER['SCRIPT_NAME'] ) ) 
 	{
 		$url = str_replace( $_SERVER['SCRIPT_NAME'] ,'', $_SERVER['REQUEST_URI'] );
 		if( substr( $url ,0 ,1 ) != '?'  )
 		{
 			$_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME']; 	
 		}
-}
+	}
 
-/**
- * Optional 
- * Force ajax controler to only be served if requested from this file.
- * This is only needed when calling controllers from files other than 'ajax.php';
- * in case of conflict with other controllers.
- *   
- * @var string file name
- */
-define('AJAX_FILE', 'ajax.php');
+	/**
+	 * Optional 
+	 * Force ajax controler to only be served if requested from this file.
+	 * This is only needed when calling controllers from files other than 'ajax.php';
+	 * in case of conflict with other controllers.
+	 *   
+	 * @var string file name
+	 */
+	define('AJAX_FILE', 'ajax.php');
 
 /**
  * Controllers Directory.
  * Directory where ajax controllers are located.
  * @constant AJAX_CD
  */	
-define('AJAX_CD', 'app/controllers');
+	define('AJAX_CD', 'application/response');
 	
 /**
  * Security Feature.
@@ -40,7 +41,7 @@ define('AJAX_CD', 'app/controllers');
  * 
  * @constant AJAX_VIEW
  */	
-define('AJAX_VIEW', 1);
+	define('AJAX_VIEW', 1);
 	
 /**
  * 
@@ -59,6 +60,8 @@ define('AJAX_VIEW', 1);
 /**
  * *End Cjax configuration*
  */
+	
+
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -92,6 +95,8 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
+			ini_set('display_errors', 1);
+			ini_set('log_errors', 1);
 			error_reporting(E_ALL);
 		break;
 	
@@ -115,7 +120,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'sys';
+	$system_path = 'system';
 
 /*
  *---------------------------------------------------------------
@@ -131,7 +136,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'app';
+	$application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------
@@ -158,10 +163,10 @@ if (defined('ENVIRONMENT'))
 	// $routing['directory'] = '';
 
 	// The controller class file name.  Example:  Mycontroller
-	// $routing['controller'] = '';
+	 $routing['controller'] = 'AjaxController';
 
 	// The controller function you wish to be called.
-	// $routing['function']	= '';
+	 $routing['function']	= 'main';
 
 
 /*
