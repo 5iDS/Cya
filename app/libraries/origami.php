@@ -22,7 +22,7 @@ class origami {
 
 			//INITIATE BIGMOMMA
 			$BIGMOMMA;
-			$allRanks = listRanks($region); // 1 x n dimensional array of connected rank IDs
+			$allRanks = listRanks($region); // 1 x n dimensional array of connected rank IDs within region
 			$n = count($allRanks); // Length of ranks IDs array; (n)
 			#-------------------------------------
 			# Populate Diagnals which are [n][n];
@@ -45,7 +45,7 @@ class origami {
 				while ($counter < $nu_N) {
 					//foreach diagonal check for direct routes starting from furtherst position (shortest direct route)
 					$BIGMOMMA[$nu_N][$diagCol] = $connectedRanks[$nu_N]; // 0 / 1 :: Tru?False
-		
+
 					$nu_N--;
 				};
 	
