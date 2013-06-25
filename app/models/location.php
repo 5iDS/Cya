@@ -94,7 +94,7 @@ class Location extends CI_Model {
 		//FIRST FIND COUNTRY ID
 		$sql = "SELECT ID FROM countries WHERE Code= ? ORDER BY ID";
 		$results = $this->db->query( $sql, array($countryCode) );
-		/**/
+		/**
 		if(class_exists('iDBug')){
 			$debug = new iDBug();
 			$debug->debug('results',$results->result());
@@ -125,6 +125,59 @@ class Location extends CI_Model {
 			}
 			/**/
 			return $provinceResults->result();
+		}
+		/**/
+	}
+	#-----------------------------------------------------------------
+	# LIST AREAS FUNCKTION
+	# List available areas in city / province
+	#
+	# @param  null
+	# @return array(object) $countryResults->result();
+	#
+	#-----------------------------------------------------------------
+	public function listAreas($default="GP"){
+		
+		//FIRST FIND DEFAULT PROVINCE/REGION ID
+		$sql1 = "SELECT ID FROM provinces WHERE Code= ? ORDER BY ID";
+		$provinceID = $this->db->query( $sql1, array($default) );
+		/**
+		if(class_exists('iDBug')){
+			$debug = new iDBug();
+			$debug->debug('provinceID',$provinceID->result());
+		}
+		/**/
+		foreach ($provinceID->result() as $id) {
+			$workingRegionID = $id->ID;
+		}
+		/**
+		if(class_exists('iDBug')){
+			$debug = new iDBug();
+			$debug->debug('workingRegionID',$workingRegionID);
+		}
+		/**/
+
+		$sql2 = "SELECT ID FROM areas WHERE Province= ? ORDER BY ID";
+		$results = $this->db->query( $sql2, array($workingRegionID) );
+		//OUTPUT [ROW]
+		foreach ($results->result() as $result) {
+			$workingRegion = $result->ID;
+		}
+		/**/
+		//RUN PROVINCES QUERY
+		if(empty($default) or empty($workingRegion) ){
+			throw new Exception("Unsupported area!");
+			return;
+		} else {
+			$area_query = "SELECT * FROM areas ORDER BY ID";
+			$areaResults = $this->db->query($area_query);
+			/**
+			if(class_exists('iDBug')){
+				$debug = new iDBug();
+				$debug->debug('countryResults',$countryResults->result());
+			}
+			/**/
+			return $areaResults->result();
 		}
 		/**/
 	}

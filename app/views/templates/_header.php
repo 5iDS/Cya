@@ -49,9 +49,11 @@ $this->load->library('user_agent');
 	} else {
 	/**/?>
 		<header id="branding" data-role="header" data-theme="b">
-			<nav id="navigation" role="navigation">
+			<nav id="navigation" class="clearfix" role="navigation">
+            <?php /** ?>
 			    <a href="./" class="btn fl" data-icon="home" data-iconpos="notext" data-transition="fade">Home</a>
-				<a href="#" class="btn btn-inverse fr" id="localize" data-icon="location" data-iconpos="notext" data-transition="fade">Localize</a>
+			<?php /**/?>
+				<a href="#" class="btn btn-inverse fr dsbtn_rounded" id="localize" data-icon="location" data-iconpos="notext" data-transition="fade">Localize</a>
 			</nav>
 			<h1><?php ?></h1>
 		</header>

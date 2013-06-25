@@ -29,8 +29,9 @@ class Pages extends CI_Controller {
 	
 	public function index()
 	{
-		$GetProvinces = $this->Location->listProvinces('ZA');
-		$GetCountries = $this->Location->listCountries('ZA');
+		//$GetCountries = $this->Location->listCountries('ZA');
+		//$GetProvinces = $this->Location->listProvinces('ZA');
+		$GetAreas = $this->Location->listAreas('GP');
 		/**
 		if(class_exists('iDBug')){
 			$debug = new iDBug();
@@ -38,8 +39,9 @@ class Pages extends CI_Controller {
 		}
 		/**/
 		$data = array(
-				'countriesArray' => $GetCountries,
-				'ProvincesArray' => $GetProvinces
+				//'countriesArray' => $GetCountries,
+				//'ProvincesArray' => $GetProvinces,
+				'GetAreas' => $GetAreas
 		);
 		
 		$this->load->view('templates/_header');

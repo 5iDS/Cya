@@ -7,15 +7,15 @@ if(class_exists('iDBug')){
 /**/
 
 ?>
-<div id="" class="">
-	<form id="nl-form" class="nl-form">
-		Im
+<div>
+	<form id="nl-form" class="nl-form tc">
+		Im in
 		<select>
-			<option value="" selected>in&hellip;</option>
+			<option value="" selected>&hellip;</option>
 			<?php 
-			if(!empty($countriesArray)){
+			if(!empty($GetAreas)){
 				
-				foreach ($countriesArray as $country) {
+				foreach ($GetAreas as $area) {
 					/**
 					if(class_exists('iDBug')){
 						$debug = new iDBug();
@@ -23,11 +23,12 @@ if(class_exists('iDBug')){
 					}
 					/**/
 					?>
-					<option value="<?php echo $country->ID;?>" data-code="<?php echo $country->Code;?>"><?php echo $country->Name;?></option>
+					<option value="<?php echo $area->ID;?>" data-province="<?php echo $area->Province;?>"><?php echo $area->Name;?></option>
 					<?php
 				}
 			};?>
 		</select>
+        <?php /** ?>
 		<br />somewhere in
 		<select>
 			<option value="1" selected>...this province</option>
@@ -39,20 +40,21 @@ if(class_exists('iDBug')){
 						$debug = new iDBug();
 						$debug->debug('province',$province);
 					}
-					/**/
+					/**
 					?>
 					<option value="<?php echo $province->ID;?>" data-code="<?php echo $province->Code;?>"><?php echo $province->Name;?></option>
 					<?php
 				}
 			};?>
 		</select>
+		<?php /**/?>
 		looking for a taxi
 		<br />to
 		<select>
 			<option value="1" selected>...Soweto?</option>
 		</select>
 		<div class="nl-submit-wrap">
-			<button class="nl-submit" type="submit">Find</button>
+			<button class="btn dsbtn_shadowed dsbtn_rounded nl-submit" type="submit">Find</button>
 		</div>
 		<div class="nl-overlay"></div>
 	</form>

@@ -1,29 +1,25 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
- * ORIGAMI SPACEWALKIN'
+ * CYA ORIGAMI SPACEWALKIN'
  *
- * ------------------------------------------------------------------------
+ * ---------------------------------------------------
  *
- * DEBUG PHP BY OUTPUTTIN (variables, arrays, objs) 
- * TO JS CONSOLE ON WEB BROWSERS
+ * Initiate user locale; setup bigmomma....ascend
  *
+ * @package	CYA
+ * @since	0.5.0
+ * @author	a.Work.of.Hip.Hop...www.5ivedesign.co.za
  *
- * @package origami
- * @since 0.5.0
- * @a.Work.of.Hip.Hop...www.5ivedesign.co.za
- */
+ * --------------------------------------------------*/
 
 class origami {
 	
 		public function __construct($region = "GP") {
 			
 			//INITIATE SOME CONTSTANTS
-			//if (!defined("LOG"))    define("LOG",1);
-			//if (!defined("INFO"))   define("INFO",2);
-			//if (!defined("WARN"))   define("WARN",3);
-			//if (!defined("ERROR"))  define("ERROR",4);
-			
+			//if (!defined("INI"))    define("INI",1);
+
 			//INITIATE BIGMOMMA
 			$BIGMOMMA;
 			$allRanks = listRanks($region); // 1 x n dimensional array of connected rank IDs

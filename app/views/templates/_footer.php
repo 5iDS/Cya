@@ -13,8 +13,8 @@
 			<?php
 		} else {/**/ ?>
 			<div id="site-generator">
-				<h4><?php echo date('Y'). ' &copy; &hellip;a.work.of.HipHop&hellip;';?></h4>
-				<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+				<h4><?php echo '&copy; '.date('Y');?></h4>
+				<p class="footer">&hellip;a.work.of.HipHop&hellip;rendered in <strong>{elapsed_time}</strong> seconds.</p>
 			</div>
 		<?php /**};/**/ ?>
 	</footer>
